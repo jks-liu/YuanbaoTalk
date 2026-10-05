@@ -1,0 +1,2 @@
+# Link the actual hardware runtime, not only self-test entry points.
+CONFIG_YT_SELF_TEST=n

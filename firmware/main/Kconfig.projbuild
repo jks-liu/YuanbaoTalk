@@ -1,0 +1,95 @@
+menu "YuanbaoTalk"
+config YT_SELF_TEST
+    bool "Run protocol/router/codec self-tests at boot instead of hardware"
+    default n
+config YT_SELF_TEST_AFE
+    bool "Run AEC/NS processing smoke test (requires supported execution environment)"
+    depends on YT_SELF_TEST
+    default n
+    help
+        The installed Windows QEMU crashes in AEC processing. Enable on a real
+        S3 or a compatible emulator to validate the cause. No I2S is started.
+config YT_CHANNEL
+    string "Business channel (number or UUID)"
+    default "1"
+config YT_RADIO_CHANNEL
+    int "Offline/AP Wi-Fi channel"
+    range 1 13
+    default 6
+config YT_TTL
+    int "Radio transmissions including source"
+    range 1 16
+    default 3
+config YT_RELAY
+    bool "Forward other devices' packets over ESP-NOW"
+    default y
+config YT_WIFI_SSID
+    string "Wi-Fi SSID (empty for offline)"
+    default ""
+config YT_WIFI_PASSWORD
+    string "Wi-Fi password"
+    default ""
+config YT_SERVER_URI
+    string "Server base URI (ws://host:8765, no trailing slash)"
+    default ""
+config YT_SERVER_TOKEN
+    string "Optional server access token"
+    default ""
+config YT_AUDIO_ENABLE
+    bool "Enable configured audio hardware"
+    default n
+config YT_I2S_BCLK
+    int "Shared I2S BCLK GPIO (-1 unconfigured)"
+    range -1 48
+    default -1
+config YT_I2S_WS
+    int "Shared I2S WS GPIO"
+    range -1 48
+    default -1
+config YT_I2S_DIN
+    int "Stereo microphone I2S data GPIO"
+    range -1 48
+    default -1
+config YT_I2S_DOUT
+    int "Speaker I2S data GPIO"
+    range -1 48
+    default -1
+config YT_I2S_MCLK
+    int "Optional codec MCLK GPIO"
+    range -1 48
+    default -1
+config YT_PTT_GPIO
+    int "Active-low PTT GPIO"
+    range -1 48
+    default -1
+config YT_MIC_SHIFT
+    int "Shift signed 32-bit I2S slot to int16 PCM"
+    range 0 16
+    default 16
+config YT_BEAMFORM
+    bool "Enable calibrated two-microphone delay-and-sum"
+    default n
+config YT_BEAM_DELAY_Q8
+    int "Relative microphone delay, signed 1/256 samples"
+    range -2048 2048
+    default 0
+config YT_MIC_RIGHT_GAIN_Q12
+    int "Right microphone calibration gain, 4096 = unity"
+    range 2048 8192
+    default 4096
+config YT_AEC_REFERENCE_DELAY
+    int "Additional speaker-reference delay in samples"
+    range 0 4096
+    default 0
+config YT_NS_ENABLE
+    bool "Noise suppression"
+    default y
+config YT_NS_LEVEL
+    int "Noise suppression strength: 0 mild, 1 medium, 2 aggressive"
+    range 0 2
+    default 0
+config YT_VERIFIED_MIX_MAX
+    int "Full-load validated decoder maximum (1 until board qualified)"
+    range 1 8
+    default 1
+endmenu

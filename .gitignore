@@ -1,0 +1,17 @@
+firmware/build/
+firmware/build-*/
+firmware/*.log
+firmware/sdkconfig.ci
+firmware/sdkconfig.ci.old
+firmware/sdkconfig.afe
+firmware/sdkconfig.afe.old
+firmware/sdkconfig.audio
+firmware/sdkconfig.audio.old
+firmware/managed_components/
+firmware/sdkconfig
+firmware/sdkconfig.old
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+tools/.cache/
